@@ -8,7 +8,7 @@ const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 
 // --- AUTH ROUTES ---
@@ -201,7 +201,8 @@ app.post('/api/aqi', async (req, res) => {
 // --- NEWS ROUTE (GEMINI AI) ---
 app.post('/api/news', async (req, res) => {
     try {
-        const genAI = new GoogleGenerativeAI("AIzaSyDs1v9s4Ziaes7Er9uNtUrMjYNSNqNcyrs");
+        const apiKey = process.env.GEMINI_API_KEY || "AIzaSyDs1v9s4Ziaes7Er9uNtUrMjYNSNqNcyrs";
+        const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const prompt = "Cari 5 berita kesehatan pernapasan terbaru dan valid minggu ini (topik: Asma, TBC, Kualitas Udara, ISPA). Return JSON array valid tanpa markdown formatting. Format: [{title, summary, source, date}]. Bahasa Indonesia.";
