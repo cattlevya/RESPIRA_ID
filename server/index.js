@@ -11,6 +11,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 
+// Health Check
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
+
 // --- AUTH ROUTES ---
 
 app.post('/api/register', async (req, res) => {

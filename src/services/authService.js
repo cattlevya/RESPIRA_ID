@@ -20,7 +20,7 @@ export const authService = {
             }
         } catch (error) {
             console.error('Login Error:', error);
-            return { success: false, message: 'Gagal terhubung ke server.' };
+            return { success: false, message: `Gagal: ${error.message}` };
         }
     },
 
@@ -44,7 +44,7 @@ export const authService = {
 
         } catch (error) {
             console.error('Register Error:', error);
-            return { success: false, message: 'Gagal terhubung ke server.' };
+            return { success: false, message: `Gagal: ${error.message}` };
         }
     },
 
