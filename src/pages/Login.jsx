@@ -119,7 +119,15 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+
+            {/* DEBUG INFO */}
+            <div className="pb-4 px-8 text-center">
+                <div className="p-2 bg-gray-100 rounded text-xs text-gray-500 break-all border border-gray-200">
+                    Debug API: {import.meta.env.VITE_API_URL || 'Not Set (Using Localhost)'}
+                </div>
+            </div>
         </div>
+        </div >
     );
 };
 
