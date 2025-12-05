@@ -14,6 +14,7 @@ import clsx from 'clsx';
 
 const DashboardUser = () => {
     const { user } = useAuth();
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const navigate = useNavigate();
 
     // State
@@ -32,7 +33,7 @@ const DashboardUser = () => {
         const fetchData = async () => {
             if (user?.id) {
                 try {
-                    const response = await fetch(`http://localhost:5000/api/dashboard/${user.id}`);
+                    const response = await fetch(`${API_URL}/dashboard/${user.id}`);
                     const result = await response.json();
 
                     if (result.success) {

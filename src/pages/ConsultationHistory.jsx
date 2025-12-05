@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Filter, Eye, Calendar, User } from 'lucide-react';
 
 const ConsultationHistory = () => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -9,7 +10,7 @@ const ConsultationHistory = () => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/admin/history/all');
+                const res = await fetch(`${API_URL}/admin/history/all`);
                 const data = await res.json();
                 if (data.success) {
                     setHistory(data.data);

@@ -51,10 +51,12 @@ const TreeVisualizer = () => {
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [loading, setLoading] = useState(true);
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
     const fetchTree = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/api/tree');
+            const res = await fetch(`${API_URL}/tree`);
             const data = await res.json();
             if (data.success) {
                 // Apply visual styles to nodes

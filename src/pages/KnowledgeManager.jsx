@@ -5,6 +5,7 @@ import LogicManager from '../components/expert/LogicManager';
 import { decisionTree } from '../data/decisionTree';
 
 const KnowledgeManager = () => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const [activeTab, setActiveTab] = useState('logic'); // logic, research
     const [loading, setLoading] = useState(false);
     const [drafts, setDrafts] = useState([]);
@@ -15,7 +16,7 @@ const KnowledgeManager = () => {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch('http://localhost:5000/api/expert/research', {
+            const res = await fetch(`${API_URL}/expert/research`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ type: 'auto' }),
@@ -36,7 +37,7 @@ const KnowledgeManager = () => {
 
     const handleApprove = async (draft, index) => {
         try {
-            const res = await fetch('http://localhost:5000/api/expert/merge', {
+            const res = await fetch(`${API_URL}/expert/merge`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ draft }),

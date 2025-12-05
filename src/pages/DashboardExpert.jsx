@@ -21,6 +21,7 @@ import clsx from 'clsx';
 
 const DashboardExpert = () => {
     const { user } = useAuth();
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState({
@@ -46,7 +47,7 @@ const DashboardExpert = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/admin/stats');
+                const response = await fetch(`${API_URL}/admin/stats`);
                 const result = await response.json();
                 if (result.success) {
                     setStats(prev => ({

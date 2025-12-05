@@ -4,6 +4,7 @@ import { Save, User, Building, FileBadge, GraduationCap, Loader2, CheckCircle } 
 
 const ProfileExpert = () => {
     const { user } = useAuth();
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -30,7 +31,8 @@ const ProfileExpert = () => {
             // I'll assume I updated the GET endpoint or will update it. 
             // Actually, I should update the GET endpoint in server/index.js to include these fields.
             // For now, let's try fetching.
-            const res = await fetch(`http://localhost:5000/api/user/profile/${user.id}`);
+            // For now, let's try fetching.
+            const res = await fetch(`${API_URL}/user/profile/${user.id}`);
             const data = await res.json();
             if (data.success) {
                 setFormData({
@@ -58,7 +60,7 @@ const ProfileExpert = () => {
         setMessage(null);
 
         try {
-            const res = await fetch(`http://localhost:5000/api/expert/profile/${user.id}`, {
+            const res = await fetch(`${API_URL}/expert/profile/${user.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

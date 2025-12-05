@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Save, Plus, Trash2, ChevronDown, ChevronRight, Edit2, AlertTriangle, CheckCircle } from 'lucide-react';
 
 const LogicManager = ({ initialTree }) => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const [tree, setTree] = useState(initialTree || []);
     const [levels, setLevels] = useState({});
     const [expandedLevels, setExpandedLevels] = useState({ 0: true });
@@ -118,7 +119,7 @@ const LogicManager = ({ initialTree }) => {
     const handleSave = async () => {
         setSaving(true);
         try {
-            const res = await fetch('http://localhost:5000/api/expert/save-tree', {
+            const res = await fetch(`${API_URL}/expert/save-tree`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ treeData: tree })

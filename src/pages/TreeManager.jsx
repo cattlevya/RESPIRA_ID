@@ -8,11 +8,13 @@ const TreeManager = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [editingNode, setEditingNode] = useState(null);
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
     // Mock Fetch (Replace with API)
     useEffect(() => {
         const fetchTree = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/tree');
+                const res = await fetch(`${API_URL}/tree`);
                 const data = await res.json();
                 if (data.success) {
                     setNodes(data.data.nodes);
